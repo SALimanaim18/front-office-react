@@ -1,72 +1,177 @@
-import React from "react";
-import { Facebook, Instagram, Twitter } from "lucide-react";
+import { Facebook, Twitter, Instagram, Mail, Phone, MapPin, Heart } from "lucide-react"
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-50 py-12 border-t">
-      <div className="container mx-auto px-4">
+    <footer className="bg-gray-50 border-t border-gray-200">
+      <div className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          {/* Logo et slogan */}
-          <div>
-            <div className="text-2xl font-bold text-sangred-DEFAULT mb-3">
-              Sang<span className="text-sangblue-DEFAULT">Connect</span>
+          {/* Logo and about */}
+          <div className="md:col-span-1">
+            <div className="flex items-center mb-4 group">
+              <div className="h-10 w-10 rounded-full bg-[#460904] flex items-center justify-center transform group-hover:scale-110 transition-transform">
+                <span className="text-white font-bold text-xl">S</span>
+              </div>
+              <span className="ml-2 text-xl font-bold">
+                <span className="text-[#460904] group-hover:text-[#5a0b06] transition-colors">Sang</span>
+                <span className="text-[#b2d3e1] group-hover:text-[#8fb9cc] transition-colors">Connect</span>
+              </span>
             </div>
-            <p className="text-gray-600 mb-6">
-              Connecter des vies, une goutte à la fois.
-            </p>
+            <p className="text-gray-600 text-sm mb-4">Connecter des vies, une goutte à la fois.</p>
             <div className="flex space-x-4">
-              <a href="#" className="text-gray-500 hover:text-sangred-DEFAULT">
+              <a href="#" className="text-gray-500 hover:text-[#460904] transition-colors transform hover:scale-110">
                 <Facebook size={20} />
               </a>
-              <a href="#" className="text-gray-500 hover:text-sangred-DEFAULT">
+              <a href="#" className="text-gray-500 hover:text-[#460904] transition-colors transform hover:scale-110">
                 <Twitter size={20} />
               </a>
-              <a href="#" className="text-gray-500 hover:text-sangred-DEFAULT">
+              <a href="#" className="text-gray-500 hover:text-[#460904] transition-colors transform hover:scale-110">
                 <Instagram size={20} />
               </a>
             </div>
           </div>
 
-          {/* Liens rapides */}
+          {/* Quick links */}
           <div>
-            <h3 className="font-semibold text-gray-900 mb-4">SangConnect</h3>
+            <h3 className="font-semibold text-gray-800 mb-4">Liens rapides</h3>
             <ul className="space-y-2">
-              <li><a href="#" className="text-gray-600 hover:text-sangred-DEFAULT">À propos</a></li>
-              <li><a href="#" className="text-gray-600 hover:text-sangred-DEFAULT">Équipe</a></li>
-              <li><a href="#" className="text-gray-600 hover:text-sangred-DEFAULT">Nos valeurs</a></li>
-              <li><a href="#" className="text-gray-600 hover:text-sangred-DEFAULT">Partenaires</a></li>
+              <li>
+                <a
+                  href="#"
+                  className="text-gray-600 hover:text-[#460904] transition-colors text-sm relative inline-block after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 hover:after:w-full after:bg-[#460904] after:transition-all"
+                >
+                  Accueil
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  className="text-gray-600 hover:text-[#460904] transition-colors text-sm relative inline-block after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 hover:after:w-full after:bg-[#460904] after:transition-all"
+                >
+                  Voir les demandes
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  className="text-gray-600 hover:text-[#460904] transition-colors text-sm relative inline-block after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 hover:after:w-full after:bg-[#460904] after:transition-all"
+                >
+                  Créer une demande
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  className="text-gray-600 hover:text-[#460904] transition-colors text-sm relative inline-block after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 hover:after:w-full after:bg-[#460904] after:transition-all"
+                >
+                  Devenir donneur
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  className="text-gray-600 hover:text-[#460904] transition-colors text-sm relative inline-block after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 hover:after:w-full after:bg-[#460904] after:transition-all"
+                >
+                  Centres de don
+                </a>
+              </li>
             </ul>
           </div>
 
-          {/* Ressources */}
+          {/* About */}
           <div>
-            <h3 className="font-semibold text-gray-900 mb-4">Ressources</h3>
+            <h3 className="font-semibold text-gray-800 mb-4">À propos</h3>
             <ul className="space-y-2">
-              <li><a href="#" className="text-gray-600 hover:text-sangred-DEFAULT">FAQ</a></li>
-              <li><a href="#" className="text-gray-600 hover:text-sangred-DEFAULT">Centres de don</a></li>
-              <li><a href="#" className="text-gray-600 hover:text-sangred-DEFAULT">Guide du donneur</a></li>
-              <li><a href="#" className="text-gray-600 hover:text-sangred-DEFAULT">Compatibilité sanguine</a></li>
+              <li>
+                <a
+                  href="#"
+                  className="text-gray-600 hover:text-[#460904] transition-colors text-sm relative inline-block after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 hover:after:w-full after:bg-[#460904] after:transition-all"
+                >
+                  Notre mission
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  className="text-gray-600 hover:text-[#460904] transition-colors text-sm relative inline-block after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 hover:after:w-full after:bg-[#460904] after:transition-all"
+                >
+                  L'équipe
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  className="text-gray-600 hover:text-[#460904] transition-colors text-sm relative inline-block after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 hover:after:w-full after:bg-[#460904] after:transition-all"
+                >
+                  Partenaires
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  className="text-gray-600 hover:text-[#460904] transition-colors text-sm relative inline-block after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 hover:after:w-full after:bg-[#460904] after:transition-all"
+                >
+                  Mentions légales
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  className="text-gray-600 hover:text-[#460904] transition-colors text-sm relative inline-block after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 hover:after:w-full after:bg-[#460904] after:transition-all"
+                >
+                  Politique de confidentialité
+                </a>
+              </li>
             </ul>
           </div>
 
           {/* Contact */}
           <div>
-            <h3 className="font-semibold text-gray-900 mb-4">Contact</h3>
-            <ul className="space-y-2">
-              <li><a href="#" className="text-gray-600 hover:text-sangred-DEFAULT">Nous contacter</a></li>
-              <li><a href="#" className="text-gray-600 hover:text-sangred-DEFAULT">Mentions légales</a></li>
-              <li><a href="#" className="text-gray-600 hover:text-sangred-DEFAULT">Confidentialité</a></li>
-              <li><a href="#" className="text-gray-600 hover:text-sangred-DEFAULT">Politique des cookies</a></li>
+            <h3 className="font-semibold text-gray-800 mb-4">Contact</h3>
+            <ul className="space-y-3">
+              <li className="flex items-start group">
+                <Mail
+                  size={18}
+                  className="text-[#460904] mr-3 flex-shrink-0 mt-0.5 group-hover:scale-110 transform transition-transform"
+                />
+                <span className="text-gray-600 text-sm group-hover:text-[#460904] transition-colors">
+                  contact@sangconnect.ma
+                </span>
+              </li>
+              <li className="flex items-start group">
+                <Phone
+                  size={18}
+                  className="text-[#460904] mr-3 flex-shrink-0 mt-0.5 group-hover:scale-110 transform transition-transform"
+                />
+                <span className="text-gray-600 text-sm group-hover:text-[#460904] transition-colors">
+                  +212 5XX-XXXXXX
+                </span>
+              </li>
+              <li className="flex items-start group">
+                <MapPin
+                  size={18}
+                  className="text-[#460904] mr-3 flex-shrink-0 mt-0.5 group-hover:scale-110 transform transition-transform"
+                />
+                <span className="text-gray-600 text-sm group-hover:text-[#460904] transition-colors">
+                  Casablanca, Maroc
+                </span>
+              </li>
             </ul>
           </div>
         </div>
 
-        <div className="border-t border-gray-200 mt-12 pt-6 text-center text-gray-500 text-sm">
-          <p>© 2025 SangConnect – Tous droits réservés.</p>
+        <div className="border-t border-gray-200 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+          <p className="text-gray-500 text-sm mb-4 md:mb-0">© 2025 SangConnect – Tous droits réservés.</p>
+          <div className="flex items-center text-sm text-gray-500 group">
+            <span>Fait avec</span>
+            <Heart size={14} className="text-[#460904] mx-1 group-hover:animate-heartbeat" />
+            <span>au Maroc</span>
+            <span className="ml-1 group-hover:animate-bounce">🇲🇦</span>
+          </div>
         </div>
       </div>
     </footer>
-  );
-};
+  )
+}
 
-export default Footer;
+export default Footer
+

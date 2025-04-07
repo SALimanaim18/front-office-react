@@ -1,49 +1,28 @@
-import React from "react";
-import { cn } from '../../lib/utils';
-
-const Button = ({
-variant = "primary",
-size = "md",
-children,
-className,
-fullWidth = false,
-...props
-}) => {
-const baseStyles =
-    "rounded-md font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2";
-
-const variantStyles = {
-    primary:
-        "bg-sangred-DEFAULT text-white hover:bg-sangred-light focus:ring-sangred-light",
-    secondary:
-        "bg-sangblue-DEFAULT text-white hover:bg-sangblue-dark focus:ring-sangblue-dark",
-    outline:
-        "border-2 border-sangred-DEFAULT text-sangred-DEFAULT hover:bg-sangred-DEFAULT hover:text-white",
-    ghost: "text-sangred-DEFAULT hover:bg-sangred-DEFAULT/10",
-};
-
-const sizeStyles = {
-    sm: "px-3 py-1.5 text-sm",
-    md: "px-4 py-2",
-    lg: "px-6 py-2.5 text-lg",
-};
-
-const widthStyles = fullWidth ? "w-full" : "";
-
-return (
-    <button
-    className={cn(
-        baseStyles,
-        variantStyles[variant],
-        sizeStyles[size],
-        widthStyles,
-        className
-    )}
-    {...props}
-    >
-    {children}
-    </button>
-);
-};
-
-export default Button;
+const Button = ({ children, variant = "primary", size = "md", className = "", ...props }) => {
+    const baseClasses =
+      "inline-flex items-center justify-center font-medium transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#460904] disabled:opacity-50 disabled:pointer-events-none"
+  
+    const variantClasses = {
+      primary: "bg-[#460904] text-white hover:bg-[#5a0b06] shadow-md",
+      outline: "border border-gray-300 bg-white text-gray-700 hover:bg-gray-50",
+      ghost: "bg-transparent hover:bg-gray-100 text-gray-700",
+    }
+  
+    const sizeClasses = {
+      sm: "text-xs px-3 py-1.5 rounded",
+      md: "text-sm px-4 py-2 rounded-md",
+      lg: "text-base px-6 py-3 rounded-lg",
+    }
+  
+    const combinedClasses = `${baseClasses} ${variantClasses[variant]} ${sizeClasses[size]} ${className}`
+  
+    return (
+      <button className={combinedClasses} {...props}>
+        {children}
+      </button>
+    )
+  }
+  
+  export default Button
+  
+  
