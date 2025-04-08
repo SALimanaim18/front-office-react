@@ -1,6 +1,7 @@
 import React from "react";
 import RequestCard from "../common/RequestCard";
 import Button from "../common/Button";
+import { Link } from 'react-router-dom';
 
 const RequestsWallSection = () => {
   // Données fictives pour les cartes de demande
@@ -61,10 +62,13 @@ return (
         </div>
 
         <div className="text-center mt-8">
-          <Button variant="secondary" size="lg">
-            Voir toutes les demandes
-          </Button>
-        </div>
+  <Link to="/demandes">
+    <Button variant="secondary" size="lg">
+      Voir toutes les demandes
+    </Button>
+  </Link>
+</div>
+
       </div>
     </section>
   );
