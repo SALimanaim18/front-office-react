@@ -1,8 +1,8 @@
-"use client"
-
 import { useState, useEffect } from "react"
 import { LogIn, Mail, Lock, Eye, EyeOff, Heart, ArrowLeft, Droplet, CheckCircle } from "lucide-react"
-import Button from "../components/common/Button2"
+import Button from "../components/common/Button"
+import { login } from "../services/api/authApi"
+
 
 const LoginPage = () => {
   const [email, setEmail] = useState("")
@@ -10,11 +10,10 @@ const LoginPage = () => {
   const [showPassword, setShowPassword] = useState(false)
   const [rememberMe, setRememberMe] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
-  const [loginMethod, setLoginMethod] = useState("email") // 'email', 'google', 'facebook'
-  const [animateBloodDrop, setAnimateBloodDrop] = useState(false)
   const [loginSuccess, setLoginSuccess] = useState(false)
+  const [animateBloodDrop, setAnimateBloodDrop] = useState(false)
+  const [loginMethod, setLoginMethod] = useState("") // Ajout de la variable manquante
 
-  // Blood drop animation effect
   useEffect(() => {
     const interval = setInterval(() => {
       setAnimateBloodDrop(true)
@@ -24,38 +23,32 @@ const LoginPage = () => {
     return () => clearInterval(interval)
   }, [])
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     setIsLoading(true)
 
-    // Simulate API call
-    setTimeout(() => {
-      setIsLoading(false)
+    try {
+      const response = await login({ email, password })
+      const token = response.data.token
+      localStorage.setItem("token", token)
       setLoginSuccess(true)
 
-      // Redirect after success animation
       setTimeout(() => {
-        // Redirect or handle successful login
-        console.log("Login successful")
+        window.location.href = "/" // ou n'importe quelle page protégée
       }, 1500)
-    }, 1500)
+    } catch (error) {
+      console.error("Erreur de connexion :", error)
+      alert("Email ou mot de passe invalide")
+      setIsLoading(false)
+    }
   }
 
+  // Ajout de la fonction handleSocialLogin manquante
   const handleSocialLogin = (provider) => {
     setLoginMethod(provider)
-    setIsLoading(true)
-
-    // Simulate API call
-    setTimeout(() => {
-      setIsLoading(false)
-      setLoginSuccess(true)
-
-      // Redirect after success animation
-      setTimeout(() => {
-        // Redirect or handle successful login
-        console.log(`Login with ${provider} successful`)
-      }, 1500)
-    }, 1500)
+    // Implémenter la logique de connexion sociale ici
+    console.log(`Connexion avec ${provider}`)
+    // Vous pourriez ajouter un appel à une API pour la connexion sociale
   }
 
   return (
@@ -361,4 +354,3 @@ const LoginPage = () => {
 }
 
 export default LoginPage
-

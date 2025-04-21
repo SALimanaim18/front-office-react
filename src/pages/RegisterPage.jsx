@@ -20,6 +20,10 @@ import {
 } from "lucide-react"
 import Button from "../components/common/Button2"
 
+import { register as registerApi } from "../services/api/authApi"
+import { useNavigate } from "react-router-dom"
+
+
 const RegisterPage = () => {
   const [step, setStep] = useState(1)
   const [formData, setFormData] = useState({
@@ -41,6 +45,8 @@ const RegisterPage = () => {
   const [isLoading, setIsLoading] = useState(false)
   const [registerSuccess, setRegisterSuccess] = useState(false)
   const [animateBloodDrop, setAnimateBloodDrop] = useState(false)
+  
+  const navigate = useNavigate()
 
   // Blood drop animation effect
   useEffect(() => {
@@ -60,27 +66,32 @@ const RegisterPage = () => {
     })
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    if (step < 3) {
+  
+    if (step < 2) {
       setStep(step + 1)
       return
     }
-
+  
     setIsLoading(true)
-
-    // Simulate API call
-    setTimeout(() => {
-      setIsLoading(false)
+  
+    try {
+      const response = await registerApi(formData)
+      console.log("Succès:", response.data)
       setRegisterSuccess(true)
-
-      // Redirect after success animation
+  
       setTimeout(() => {
-        // Redirect or handle successful registration
-        console.log("Registration successful", formData)
+        navigate("/login") // redirection vers la page de connexion
       }, 2000)
-    }, 1500)
+    } catch (error) {
+      console.error("Erreur d'inscription:", error.response?.data || error.message)
+      alert("Erreur lors de l'inscription. Vérifiez vos données ou réessayez plus tard.")
+    } finally {
+      setIsLoading(false)
+    }
   }
+  
 
   const handleSocialRegister = (provider) => {
     setFormData({
@@ -227,21 +238,6 @@ const RegisterPage = () => {
                     </div>
                     <div className="ml-2">
                       <p className={`text-sm ${step >= 2 ? "text-white" : "text-white/70"}`}>Profil</p>
-                    </div>
-                  </div>
-                </div>
-                <div className={`h-1 w-12 ${step >= 3 ? "bg-white" : "bg-white/30"}`}></div>
-                <div className="flex-1">
-                  <div className="flex items-center">
-                    <div
-                      className={`h-8 w-8 rounded-full flex items-center justify-center ${
-                        step >= 3 ? "bg-white text-[#460904]" : "bg-white/30 text-white"
-                      }`}
-                    >
-                      3
-                    </div>
-                    <div className="ml-2">
-                      <p className={`text-sm ${step >= 3 ? "text-white" : "text-white/70"}`}>Préférences</p>
                     </div>
                   </div>
                 </div>
@@ -531,6 +527,33 @@ const RegisterPage = () => {
                       </div>
                     </div>
 
+              
+
+                    {/* Terms and Conditions */}
+                    <div className="mt-6">
+                      <div className="flex items-start">
+                        <input
+                          id="acceptTerms"
+                          name="acceptTerms"
+                          type="checkbox"
+                          checked={formData.acceptTerms}
+                          onChange={handleChange}
+                          className="h-5 w-5 text-[#460904] focus:ring-[#b2d3e1] border-gray-300 rounded mt-1"
+                          required
+                        />
+                        <label htmlFor="acceptTerms" className="ml-2 block text-sm text-gray-700">
+                          J'accepte les{" "}
+                          <a href="/terms" className="text-[#460904] hover:underline">
+                            conditions d'utilisation
+                          </a>{" "}
+                          et la{" "}
+                          <a href="/privacy" className="text-[#460904] hover:underline">
+                            politique de confidentialité
+                          </a>
+                        </label>
+                      </div>
+                    </div>
+
                     {/* Security notice */}
                     <div className="flex items-start p-4 border border-[#b2d3e1]/50 rounded-lg bg-[#b2d3e1]/10">
                       <Shield className="h-5 w-5 text-[#460904] mr-3 flex-shrink-0 mt-0.5" />
@@ -543,143 +566,26 @@ const RegisterPage = () => {
                   </div>
                 )}
 
-                {/* Step 3: Preferences */}
-                {step === 3 && (
-                  <div className="space-y-6 animate-fadeIn">
-                    <h2 className="text-xl font-semibold text-gray-800 mb-4">Préférences de don</h2>
-
-                    {/* Blood Type */}
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-3">Groupe sanguin (si connu)</label>
-                      <div className="grid grid-cols-4 gap-3">
-                        {bloodTypes.map((type) => (
-                          <div key={type} className="flex justify-center">
-                            <button
-                              type="button"
-                              className={getBloodTypeStyle(type, formData.bloodType === type)}
-                              onClick={() => setFormData({ ...formData, bloodType: type })}
-                            >
-                              {type}
-                            </button>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* Donor Status */}
-                    <div className="bg-gray-50 p-4 rounded-lg">
-                      <div className="flex items-start">
-                        <div className="flex items-center h-5">
-                          <input
-                            id="isDonor"
-                            name="isDonor"
-                            type="checkbox"
-                            checked={formData.isDonor}
-                            onChange={handleChange}
-                            className="h-4 w-4 text-[#460904] focus:ring-[#b2d3e1] border-gray-300 rounded"
-                          />
-                        </div>
-                        <div className="ml-3">
-                          <label htmlFor="isDonor" className="font-medium text-gray-700">
-                            Je souhaite devenir donneur
-                          </label>
-                          <p className="text-gray-500 text-sm">
-                            En cochant cette case, vous acceptez d'être contacté pour des dons de sang en fonction des
-                            besoins.
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Terms and Conditions */}
-                    <div className="bg-gray-50 p-4 rounded-lg">
-                      <div className="flex items-start">
-                        <div className="flex items-center h-5">
-                          <input
-                            id="acceptTerms"
-                            name="acceptTerms"
-                            type="checkbox"
-                            checked={formData.acceptTerms}
-                            onChange={handleChange}
-                            className="h-4 w-4 text-[#460904] focus:ring-[#b2d3e1] border-gray-300 rounded"
-                            required
-                          />
-                        </div>
-                        <div className="ml-3">
-                          <label htmlFor="acceptTerms" className="font-medium text-gray-700">
-                            J'accepte les conditions d'utilisation
-                          </label>
-                          <p className="text-gray-500 text-sm">
-                            En vous inscrivant, vous acceptez nos{" "}
-                            <a href="#" className="text-[#460904] hover:underline">
-                              conditions d'utilisation
-                            </a>{" "}
-                            et notre{" "}
-                            <a href="#" className="text-[#460904] hover:underline">
-                              politique de confidentialité
-                            </a>
-                            .
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Information notice */}
-                    <div className="flex items-start p-4 border border-[#b2d3e1]/50 rounded-lg bg-[#b2d3e1]/10">
-                      <AlertCircle className="h-5 w-5 text-[#460904] mr-3 flex-shrink-0 mt-0.5" />
-                      <p className="text-sm text-gray-600">
-                        Vos informations personnelles sont protégées et ne seront jamais partagées sans votre
-                        consentement. Elles sont utilisées uniquement pour faciliter le processus de don de sang et pour
-                        vous contacter en cas de besoin urgent correspondant à votre groupe sanguin.
-                      </p>
-                    </div>
-                  </div>
-                )}
-
-                {/* Navigation buttons */}
-                <div className="mt-8 flex justify-between">
-                  {step > 1 ? (
-                    <Button type="button" variant="outline" onClick={() => setStep(step - 1)} className="px-4 py-2.5">
-                      Précédent
-                    </Button>
-                  ) : (
-                    <div></div> // Empty div for spacing
+                {/* Form buttons */}
+                <div className="mt-8 flex flex-col sm:flex-row justify-between items-center gap-4">
+                  {step > 1 && (
+                    <button
+                      type="button"
+                      onClick={() => setStep(step - 1)}
+                      className="w-full sm:w-auto flex items-center justify-center py-2.5 px-6 border border-gray-300 rounded-lg shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#b2d3e1] transition-all"
+                    >
+                      <ArrowLeft size={16} className="mr-2" />
+                      Retour
+                    </button>
                   )}
-
                   <Button
                     type="submit"
-                    className="px-6 py-2.5 flex items-center group"
-                    disabled={isLoading || (step === 3 && !formData.acceptTerms)}
+                    disabled={isLoading || (step === 2 && !formData.acceptTerms)}
+                    loading={isLoading}
+                    className="w-full sm:w-auto"
+                    color="primary"
                   >
-                    {isLoading ? (
-                      <svg
-                        className="animate-spin -ml-1 mr-2 h-4 w-4 text-white"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                      >
-                        <circle
-                          className="opacity-25"
-                          cx="12"
-                          cy="12"
-                          r="10"
-                          stroke="currentColor"
-                          strokeWidth="4"
-                        ></circle>
-                        <path
-                          className="opacity-75"
-                          fill="currentColor"
-                          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                        ></path>
-                      </svg>
-                    ) : step < 3 ? (
-                      "Continuer"
-                    ) : (
-                      <>
-                        <UserPlus size={18} className="mr-2 group-hover:translate-x-1 transition-transform" />
-                        S'inscrire
-                      </>
-                    )}
+                    {step < 2 ? "Continuer" : "Créer mon compte"}
                   </Button>
                 </div>
               </form>
@@ -707,4 +613,3 @@ const RegisterPage = () => {
 }
 
 export default RegisterPage
-
