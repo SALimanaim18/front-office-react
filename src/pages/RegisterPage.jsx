@@ -18,7 +18,7 @@ import {
   Droplet,
   Shield,
 } from "lucide-react"
-import Button from "../components/common/Button"
+import Button from "../components/common/Button2"
 
 const RegisterPage = () => {
   const [step, setStep] = useState(1)

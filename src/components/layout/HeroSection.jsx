@@ -1,4 +1,4 @@
-import Button from "../common/Button"
+import Button from "../common/Button2"
 import { Heart, Droplet } from "lucide-react"
 
 const HeroSection = () => {
