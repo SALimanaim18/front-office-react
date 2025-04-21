@@ -1,7 +1,6 @@
+"use client";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import jsPDF from "jspdf";
-
+import { useNavigate } from "react-router-dom"; 
 export default function DonorEligibilityPage() {
   const [responses, setResponses] = useState({
     age: "",
@@ -9,308 +8,100 @@ export default function DonorEligibilityPage() {
     recentDonation: "",
     illness: "",
     medication: "",
-    bloodPressure: "",
-    pregnancy: "",
   });
 
-  const [currentStep, setCurrentStep] = useState(1);
-  const [isEligible, setIsEligible] = useState(false);
   const [result, setResult] = useState(null);
-  const [showNext, setShowNext] = useState(false);
-  const navigate = useNavigate();
+  const navigate = useNavigate(); 
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setResponses((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleNext = () => {
-    setCurrentStep((prevStep) => prevStep + 1);
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Vérification d'éligibilité
-    const eligible =
+    const isEligible =
       responses.age === "yes" &&
       responses.weight === "yes" &&
       responses.recentDonation === "no" &&
       responses.illness === "no" &&
-      responses.medication === "no" &&
-      responses.bloodPressure === "yes" &&
-      responses.pregnancy === "no";
+      responses.medication === "no";
 
-    setIsEligible(eligible);
-
-    const pdf = new jsPDF();
-    pdf.setFontSize(16);
-    pdf.text("Rapport d'éligibilité au don de sang", 20, 20);
-    pdf.setFontSize(12);
-
-    Object.entries(responses).forEach(([key, value], index) => {
-      pdf.text(`${key} : ${value}`, 20, 40 + index * 10);
-    });
-
-    pdf.text(
-      `Résultat : ${eligible ? "Éligible" : "Non éligible"} pour le don de sang.`,
-      20,
-      100
-    );
-
-    pdf.save("rapport_eligibilite.pdf");
-
-    if (eligible) {
-      setResult("✅ Vous êtes éligible ! Rapport téléchargé.");
-      setShowNext(true);
-    } else {
-      setResult("❌ Désolé, vous n'êtes pas éligible. Rapport téléchargé.");
-    }
-  };
-
-  const handleRedirect = () => {
-    navigate("/devenir-donneur");
-  };
-
-  // Questions par étape
-  const renderStep = () => {
-    switch (currentStep) {
-      case 1:
-        return (
-          <div>
-            <p className="text-lg font-semibold text-red-600">Votre âge</p>
-            <p className="text-md text-gray-700">Avez-vous plus de 18 ans ?</p>
-            <label>
-              <input
-                type="radio"
-                name="age"
-                value="yes"
-                checked={responses.age === "yes"}
-                onChange={handleChange}
-                className="mr-2"
-              />
-              Oui
-            </label>
-            <label>
-              <input
-                type="radio"
-                name="age"
-                value="no"
-                checked={responses.age === "no"}
-                onChange={handleChange}
-                className="mr-2"
-              />
-              Non
-            </label>
-          </div>
-        );
-      case 2:
-        return (
-          <div>
-            <p className="text-lg font-semibold text-red-600">Votre poids</p>
-            <p className="text-md text-gray-700">Pesez-vous plus de 50 kg ?</p>
-            <label>
-              <input
-                type="radio"
-                name="weight"
-                value="yes"
-                checked={responses.weight === "yes"}
-                onChange={handleChange}
-                className="mr-2"
-              />
-              Oui
-            </label>
-            <label>
-              <input
-                type="radio"
-                name="weight"
-                value="no"
-                checked={responses.weight === "no"}
-                onChange={handleChange}
-                className="mr-2"
-              />
-              Non
-            </label>
-          </div>
-        );
-      case 3:
-        return (
-          <div>
-            <p className="text-lg font-semibold text-red-600">Dernier don</p>
-            <p className="text-md text-gray-700">Avez-vous donné du sang dans les 3 derniers mois ?</p>
-            <label>
-              <input
-                type="radio"
-                name="recentDonation"
-                value="yes"
-                checked={responses.recentDonation === "yes"}
-                onChange={handleChange}
-                className="mr-2"
-              />
-              Oui
-            </label>
-            <label>
-              <input
-                type="radio"
-                name="recentDonation"
-                value="no"
-                checked={responses.recentDonation === "no"}
-                onChange={handleChange}
-                className="mr-2"
-              />
-              Non
-            </label>
-          </div>
-        );
-      case 4:
-        return (
-          <div>
-            <p className="text-lg font-semibold text-red-600">Maladies</p>
-            <p className="text-md text-gray-700">Souffrez-vous d'une maladie chronique ?</p>
-            <label>
-              <input
-                type="radio"
-                name="illness"
-                value="yes"
-                checked={responses.illness === "yes"}
-                onChange={handleChange}
-                className="mr-2"
-              />
-              Oui
-            </label>
-            <label>
-              <input
-                type="radio"
-                name="illness"
-                value="no"
-                checked={responses.illness === "no"}
-                onChange={handleChange}
-                className="mr-2"
-              />
-              Non
-            </label>
-          </div>
-        );
-      case 5:
-        return (
-          <div>
-            <p className="text-lg font-semibold text-red-600">Médicaments</p>
-            <p className="text-md text-gray-700">Prenez-vous des médicaments régulièrement ?</p>
-            <label>
-              <input
-                type="radio"
-                name="medication"
-                value="yes"
-                checked={responses.medication === "yes"}
-                onChange={handleChange}
-                className="mr-2"
-              />
-              Oui
-            </label>
-            <label>
-              <input
-                type="radio"
-                name="medication"
-                value="no"
-                checked={responses.medication === "no"}
-                onChange={handleChange}
-                className="mr-2"
-              />
-              Non
-            </label>
-          </div>
-        );
-      case 6:
-        return (
-          <div>
-            <p className="text-lg font-semibold text-red-600">Pression artérielle</p>
-            <p className="text-md text-gray-700">Avez-vous une pression artérielle normale ?</p>
-            <label>
-              <input
-                type="radio"
-                name="bloodPressure"
-                value="yes"
-                checked={responses.bloodPressure === "yes"}
-                onChange={handleChange}
-                className="mr-2"
-              />
-              Oui
-            </label>
-            <label>
-              <input
-                type="radio"
-                name="bloodPressure"
-                value="no"
-                checked={responses.bloodPressure === "no"}
-                onChange={handleChange}
-                className="mr-2"
-              />
-              Non
-            </label>
-          </div>
-        );
-      case 7:
-        return (
-          <div>
-            <p className="text-lg font-semibold text-red-600">Grossesse</p>
-            <p className="text-md text-gray-700">Êtes-vous enceinte ou avez-vous accouché récemment ?</p>
-            <label>
-              <input
-                type="radio"
-                name="pregnancy"
-                value="yes"
-                checked={responses.pregnancy === "yes"}
-                onChange={handleChange}
-                className="mr-2"
-              />
-              Oui
-            </label>
-            <label>
-              <input
-                type="radio"
-                name="pregnancy"
-                value="no"
-                checked={responses.pregnancy === "no"}
-                onChange={handleChange}
-                className="mr-2"
-              />
-              Non
-            </label>
-          </div>
-        );
-      default:
-        return null;
-    }
+      if (isEligible) {
+        // ✅ Redirection si éligible
+        navigate("/devenir-donneur");
+      } else {
+        setResult("Désolé, vous n'êtes pas éligible pour donner votre sang pour le moment.");
+      }
   };
 
   return (
-    <div className="max-w-3xl mx-auto px-4 py-8 bg-gradient-to-r from-red-500 to-yellow-500 rounded-xl shadow-lg">
-      <h1 className="text-3xl font-extrabold text-center text-white mb-6">Évaluation de l'éligibilité au don de sang</h1>
-      <form onSubmit={handleSubmit} className="bg-white p-6 rounded-lg shadow-lg space-y-6">
-        {renderStep()}
-        <div className="flex justify-between mt-4">
-          <button
-            type="button"
-            onClick={handleNext}
-            className="bg-red-600 text-white py-2 px-4 rounded hover:bg-red-700"
-          >
-            Suivant
-          </button>
-        </div>
-      </form>
+    <div className="min-h-screen bg-gradient-to-br from-red-50 to-white flex flex-col items-center justify-center p-6">
+      <div className="bg-white shadow-2xl rounded-2xl p-8 max-w-2xl w-full">
+        <h1 className="text-3xl font-bold text-center text-red-600 mb-2">Test d'Éligibilité au Don de Sang</h1>
+        <p className="text-center text-gray-600 mb-6 italic">Répondez à ces quelques questions pour savoir si vous pouvez sauver une vie aujourd’hui.</p>
 
-      {result && <p className="mt-4 text-center font-semibold text-white">{result}</p>}
+        <form onSubmit={handleSubmit} className="space-y-6">
+          {/* Question 1 */}
+          <div>
+            <p className="font-semibold">Avez-vous entre 18 et 65 ans ?</p>
+            <div className="flex gap-4 mt-2">
+              <label><input type="radio" name="age" value="yes" onChange={handleChange} /> Oui</label>
+              <label><input type="radio" name="age" value="no" onChange={handleChange} /> Non</label>
+            </div>
+          </div>
 
-      {showNext && (
-        <div className="mt-6 text-center">
+          {/* Question 2 */}
+          <div>
+            <p className="font-semibold">Pesez-vous plus de 50 kg ?</p>
+            <div className="flex gap-4 mt-2">
+              <label><input type="radio" name="weight" value="yes" onChange={handleChange} /> Oui</label>
+              <label><input type="radio" name="weight" value="no" onChange={handleChange} /> Non</label>
+            </div>
+          </div>
+
+          {/* Question 3 */}
+          <div>
+            <p className="font-semibold">Avez-vous donné du sang au cours des 3 derniers mois ?</p>
+            <div className="flex gap-4 mt-2">
+              <label><input type="radio" name="recentDonation" value="yes" onChange={handleChange} /> Oui</label>
+              <label><input type="radio" name="recentDonation" value="no" onChange={handleChange} /> Non</label>
+            </div>
+          </div>
+
+          {/* Question 4 */}
+          <div>
+            <p className="font-semibold">Souffrez-vous actuellement d’une maladie infectieuse ?</p>
+            <div className="flex gap-4 mt-2">
+              <label><input type="radio" name="illness" value="yes" onChange={handleChange} /> Oui</label>
+              <label><input type="radio" name="illness" value="no" onChange={handleChange} /> Non</label>
+            </div>
+          </div>
+
+          {/* Question 5 */}
+          <div>
+            <p className="font-semibold">Prenez-vous actuellement des médicaments ?</p>
+            <div className="flex gap-4 mt-2">
+              <label><input type="radio" name="medication" value="yes" onChange={handleChange} /> Oui</label>
+              <label><input type="radio" name="medication" value="no" onChange={handleChange} /> Non</label>
+            </div>
+          </div>
+
           <button
-            onClick={handleRedirect}
-            className="bg-blue-600 text-white py-2 px-6 rounded-full hover:bg-blue-700"
+            type="submit"
+            className="w-full bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded-xl shadow mt-4 transition duration-300"
           >
-            Devenir Donneur
+            Vérifier mon éligibilité
           </button>
-        </div>
-      )}
+        </form>
+
+        {result && (
+          <div className="mt-6 p-4 bg-gray-100 border-l-4 border-red-500 text-gray-800 rounded">
+            <strong>Résultat :</strong> {result}
+          </div>
+        )}
+      </div>
     </div>
   );
 }
