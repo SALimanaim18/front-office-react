@@ -46,8 +46,8 @@ const Navbar = () => {
             <a href="#requests" className="text-gray-800 hover:text-[#460904] font-medium transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 hover:after:w-full after:bg-[#460904] after:transition-all">Voir les demandes</a>
             {isLoggedIn && (
               <>
-                <a href="#create" className="text-gray-800 hover:text-[#460904] font-medium transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 hover:after:w-full after:bg-[#460904] after:transition-all">Créer une demande</a>
-                <a href="#donor" className="text-gray-800 hover:text-[#460904] font-medium transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 hover:after:w-full after:bg-[#460904] after:transition-all">Devenir donneur</a>
+                <a href="/eligibilite-donneur" className="text-gray-800 hover:text-[#460904] font-medium transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 hover:after:w-full after:bg-[#460904] after:transition-all">Créer une demande</a>
+                <a href="/devenir-donneur" className="text-gray-800 hover:text-[#460904] font-medium transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 hover:after:w-full after:bg-[#460904] after:transition-all">Devenir donneur</a>
               </>
             )}
           </nav>

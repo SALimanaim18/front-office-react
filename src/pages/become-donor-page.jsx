@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import { addDonor } from "../services/api/donorApi";
 
 export default function BecomeDonorPage() {
   const [formData, setFormData] = useState({
@@ -16,11 +17,28 @@ export default function BecomeDonorPage() {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Formulaire soumis :", formData);
-    alert("Merci pour votre engagement !");
+  
+    try {
+      const response = await addDonor(formData); // Utiliser la fonction API
+      console.log("Donneur ajouté avec succès:", response);
+      alert("Merci pour votre engagement !");
+      setFormData({
+        fullName: "",
+        bloodType: "",
+        city: "",
+        contactPhone: "",
+        availability: "",
+        message: "",
+      });
+    } catch (error) {
+      console.error("Erreur API:", error);
+      alert("Une erreur est survenue. Veuillez réessayer.");
+    }
   };
+  
+
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-red-50 via-white to-red-100 flex items-center justify-center px-4 py-8">
