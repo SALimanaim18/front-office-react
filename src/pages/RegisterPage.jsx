@@ -66,6 +66,7 @@ const RegisterPage = () => {
     })
   }
 
+
   const handleSubmit = async (e) => {
     e.preventDefault()
   
