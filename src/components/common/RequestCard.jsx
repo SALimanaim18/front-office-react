@@ -1,4 +1,4 @@
-import Button from "./Button"
+import Button from "./Button2"
 
 const RequestCard = ({ request, delay = 0 }) => {
   // Function to determine urgency level styling

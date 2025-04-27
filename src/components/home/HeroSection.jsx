@@ -1,7 +1,10 @@
 import React from "react";
+import { useNavigate } from "react-router-dom"; // 🔁 Pour la navigation
 import Button from "../common/Button";
 
 const HeroSection = () => {
+  const navigate = useNavigate(); // 🔁 Hook de navigation
+
   return (
     <section className="relative overflow-hidden bg-gradient-to-b from-white to-sangblue-light/20 py-16 md:py-24">
       <div className="container mx-auto px-4">
@@ -15,7 +18,11 @@ const HeroSection = () => {
               SangConnect est la première plateforme sociale marocaine qui connecte directement les donneurs, les demandeurs et les centres de transfusion sanguine.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-              <Button variant="primary" size="lg">
+              <Button
+                variant="primary"
+                size="lg"
+                onClick={() => navigate("/creer-demande")}
+              >
                 Créer une demande
               </Button>
               <Button variant="outline" size="lg">
@@ -23,6 +30,7 @@ const HeroSection = () => {
               </Button>
             </div>
           </div>
+
           <div className="flex justify-center relative">
             <div className="w-full h-72 md:h-96 bg-gradient-to-br from-sangred-light/20 to-sangblue-light/30 rounded-2xl overflow-hidden shadow-lg relative">
               <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1615461066841-6116e61058f4?q=80&w=1000')] bg-cover bg-center opacity-80 mix-blend-overlay"></div>
@@ -39,7 +47,7 @@ const HeroSection = () => {
           </div>
         </div>
       </div>
-      
+
       {/* Decorative elements */}
       <div className="hidden md:block absolute top-1/4 left-0 w-24 h-24 bg-sangblue-light rounded-full opacity-20 -translate-x-1/2"></div>
       <div className="hidden md:block absolute bottom-1/4 right-0 w-32 h-32 bg-sangred-DEFAULT rounded-full opacity-10 translate-x-1/2"></div>
