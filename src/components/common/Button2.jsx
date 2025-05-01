@@ -9,7 +9,7 @@ const Button = React.forwardRef(
       variant = "default",
       size = "default",
       asChild = false,
-      type = "button", // 👈 important !
+      type = "button", 
       ...props
     },
     ref
@@ -35,7 +35,7 @@ const Button = React.forwardRef(
           className
         )}
         ref={ref}
-        type={type} // 👈 type important ici
+        type={type} 
         {...props}
       />
     );
@@ -44,4 +44,4 @@ const Button = React.forwardRef(
 
 Button.displayName = "Button";
 
-export default Button; // ✅ export par défaut
+export default Button; 

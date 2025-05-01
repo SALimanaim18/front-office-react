@@ -18,7 +18,7 @@ export default function AppRoutes() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
         
-        
+        <Route path="/demandes" element={<Demandes></Demandes>}/>
         {/* Vérification de l'authentification pour "Devenir Donneur" */}
         <Route
           path="/devenir-donneur"
