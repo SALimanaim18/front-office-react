@@ -1,13 +1,13 @@
-// src/routes/AppRoutes.jsx
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import LoginPage from "../pages/LoginPage";
 import RegisterPage from "../pages/RegisterPage";
 import HomePage from "../pages/HomePage";
-import Demandes from "../pages/Demandes";
-import BecomeDonorPage from "../pages/become-donor-page";
-import CreateRequestPage from "../pages/create-request-page";
-import RequestList from '../RequestList'; // ou le chemin correct vers RequestList
-import DonorEligibilityPage from "../pages/DonorEligibilityPage";
+import RequestList from "../RequestList"; 
+import FormulaireDemandeSang from "../pages/FormulaireDemandeSang";
+import EligibilityQuestionnaire from "../pages/EligibilityQuestionnaire"
+
+
+import BloodDonationRequests from "../pages/BloodDonationRequests"
 export default function AppRoutes() {
   const isAuthenticated = localStorage.getItem('authToken'); // Vérifie si l'utilisateur est authentifié
 
@@ -18,16 +18,18 @@ export default function AppRoutes() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
         
-        <Route path="/demandes" element={<Demandes></Demandes>}/>
+        <Route path="/demandes" element={<BloodDonationRequests/>}/>
         {/* Vérification de l'authentification pour "Devenir Donneur" */}
-        <Route
+        {/* <Route
           path="/devenir-donneur"
           element={ <BecomeDonorPage  />}
-        />
+        /> */}
         {/* Vérification de l'authentification pour "Créer Demande" */}
-        <Route path="/creer-demande" element={<CreateRequestPage />} />
-        <Route path="/eligibilite-donneur" element={<DonorEligibilityPage />} />
-        <Route path="/requests" component={RequestList} />
+        {/* <Route path="/creer-demande" element={<CreateRequestPage />} /> */}
+        {/* <Route path="/eligibilite-donneur" element={<DonorEligibilityPage />} /> */}
+        <Route path="/requests" element={RequestList} />
+        <Route path="/FormulaireDemandeSang" element={<FormulaireDemandeSang />}/>
+        <Route path="/EligibilityQuestionnaire" element={<EligibilityQuestionnaire></EligibilityQuestionnaire>}/>
       </Routes>
     </Router>
   );

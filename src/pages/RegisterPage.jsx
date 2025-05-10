@@ -22,6 +22,8 @@ import Button from "../components/common/Button2"
 
 import { register as registerApi } from "../services/api/authApi"
 import { useNavigate } from "react-router-dom"
+import Navbar from "../components/layout/Navbar"
+
 
 
 const RegisterPage = () => {
@@ -34,18 +36,19 @@ const RegisterPage = () => {
     confirmPassword: "",
     birthDate: "",
     phone: "",
-    city: "",
-    bloodType: "",
-    isDonor: false,
+    city:"",
     acceptTerms: false,
-    registerMethod: "email", // 'email', 'google', 'facebook'
+    registerMethod: "email",
   })
   const [showPassword, setShowPassword] = useState(false)
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [registerSuccess, setRegisterSuccess] = useState(false)
   const [animateBloodDrop, setAnimateBloodDrop] = useState(false)
-  
+
+
+
+
   const navigate = useNavigate()
 
   // Blood drop animation effect
@@ -76,12 +79,11 @@ const RegisterPage = () => {
     }
   
     setIsLoading(true)
-  
     try {
       const response = await registerApi(formData)
       console.log("Succès:", response.data)
       setRegisterSuccess(true)
-  
+      console.log(formData)
       setTimeout(() => {
         navigate("/login") // redirection vers la page de connexion
       }, 2000)
@@ -126,6 +128,8 @@ const RegisterPage = () => {
   }
 
   return (
+    <>
+    <Navbar></Navbar>
     <div className="min-h-screen flex flex-col bg-gradient-to-br from-white to-[#b2d3e1]/20 relative overflow-hidden">
       {/* Animated blood cells in background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -498,35 +502,34 @@ const RegisterPage = () => {
                       </div>
                     </div>
 
-                    {/* City */}
-                    <div>
-                      <label htmlFor="city" className="block text-sm font-medium text-gray-700 mb-1">
-                        Ville
-                      </label>
-                      <div className="relative">
-                        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                          <MapPin size={18} className="text-gray-400" />
-                        </div>
-                        <select
-                          id="city"
-                          name="city"
-                          value={formData.city}
-                          onChange={handleChange}
-                          className="pl-10 w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#b2d3e1] focus:border-[#b2d3e1] transition-all"
-                          required
-                        >
-                          <option value="">Sélectionnez votre ville</option>
-                          <option value="casablanca">Casablanca</option>
-                          <option value="rabat">Rabat</option>
-                          <option value="marrakech">Marrakech</option>
-                          <option value="tanger">Tanger</option>
-                          <option value="fes">Fès</option>
-                          <option value="agadir">Agadir</option>
-                          <option value="meknes">Meknès</option>
-                          <option value="oujda">Oujda</option>
-                        </select>
-                      </div>
-                    </div>
+                   {/* City */}
+<div>
+  <label htmlFor="city" className="block text-sm font-medium text-gray-700 mb-1">
+    Ville
+  </label>
+  <div className="relative">
+    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+      <MapPin size={18} className="text-gray-400" />
+    </div>
+    <select
+      id="city"
+      name="city"
+      value={formData.city}
+      onChange={handleChange}
+      className="pl-10 w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#b2d3e1] focus:border-[#b2d3e1] transition-all"
+      required
+    >
+      <option value="">Sélectionnez votre ville</option>
+      <option value="Casablanca">Casablanca</option>
+      <option value="Rabat">Rabat</option>
+      <option value="Fès">Fès</option>
+      <option value="Marrakech">Marrakech</option>
+      <option value="Tanger">Tanger</option>
+      <option value="Agadir">Agadir</option>
+    </select>
+  </div>
+</div>
+
 
               
 
@@ -610,6 +613,7 @@ const RegisterPage = () => {
         <p>© 2025 SangConnect – Tous droits réservés.</p>
       </div>
     </div>
+    </>
   )
 }
 

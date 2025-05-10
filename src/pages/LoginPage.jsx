@@ -2,6 +2,7 @@ import { useState, useEffect } from "react"
 import { LogIn, Mail, Lock, Eye, EyeOff, Heart, ArrowLeft, Droplet, CheckCircle } from "lucide-react"
 import Button from "../components/common/Button"
 import { login } from "../services/api/authApi"
+import Navbar from "../components/layout/Navbar"
 
 
 const LoginPage = () => {
@@ -52,6 +53,8 @@ const LoginPage = () => {
   }
 
   return (
+    <>
+    <Navbar></Navbar>
     <div className="min-h-screen flex flex-col bg-gradient-to-br from-white to-[#b2d3e1]/20 relative overflow-hidden">
       {/* Animated blood cells in background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -350,6 +353,7 @@ const LoginPage = () => {
         <p>© 2025 SangConnect – Tous droits réservés.</p>
       </div>
     </div>
+    </>
   )
 }
 

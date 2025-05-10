@@ -9,12 +9,15 @@ const Button = React.forwardRef(
       variant = "default",
       size = "default",
       asChild = false,
-      type = "button", 
+      type = "button",
+      loading, // ❗️On extrait loading pour éviter de le passer au DOM
+      children,
       ...props
     },
     ref
   ) => {
     const Comp = asChild ? Slot : "button";
+
     return (
       <Comp
         className={cn(
@@ -22,11 +25,16 @@ const Button = React.forwardRef(
           {
             "bg-gradient-to-r from-[#5a0b06] to-[#7a1b16] hover:from-[#4a0905] hover:to-[#6a0b06] text-white":
               variant === "default",
-            "bg-destructive text-destructive-foreground hover:bg-destructive/90": variant === "destructive",
-            "border border-input bg-background hover:bg-accent hover:text-accent-foreground": variant === "outline",
-            "bg-secondary text-secondary-foreground hover:bg-secondary/80": variant === "secondary",
-            "bg-transparent hover:bg-accent hover:text-accent-foreground": variant === "ghost",
-            "bg-transparent underline-offset-4 hover:underline text-[#5a0b06]": variant === "link",
+            "bg-destructive text-destructive-foreground hover:bg-destructive/90":
+              variant === "destructive",
+            "border border-input bg-background hover:bg-accent hover:text-accent-foreground":
+              variant === "outline",
+            "bg-secondary text-secondary-foreground hover:bg-secondary/80":
+              variant === "secondary",
+            "bg-transparent hover:bg-accent hover:text-accent-foreground":
+              variant === "ghost",
+            "bg-transparent underline-offset-4 hover:underline text-[#5a0b06]":
+              variant === "link",
             "h-10 px-4 py-2": size === "default",
             "h-9 rounded-md px-3": size === "sm",
             "h-11 rounded-md px-8": size === "lg",
@@ -35,13 +43,16 @@ const Button = React.forwardRef(
           className
         )}
         ref={ref}
-        type={type} 
+        type={type}
+        disabled={props.disabled || loading}
         {...props}
-      />
+      >
+        {loading ? "Chargement..." : children}
+      </Comp>
     );
   }
 );
 
 Button.displayName = "Button";
 
-export default Button; 
+export default Button;
