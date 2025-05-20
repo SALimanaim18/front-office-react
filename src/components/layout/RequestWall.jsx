@@ -61,7 +61,7 @@ const RequestWall = () => {
     <section className="py-16 bg-white" id="requests">
     <div className="container mx-auto px-4">
         <div className="text-center mb-8">
-        <h2 className="text-3xl md:text-4xl font-bold text-[#460904] mb-4 relative inline-block">
+        <h2 className="text-3xl md:text-4xl font-bold text-[#d93f31] mb-4 relative inline-block">
             Demandes actuelles
             <div className="absolute h-1 w-12 bg-[#b2d3e1] bottom-0 left-1/2 transform -translate-x-1/2"></div>
         </h2>

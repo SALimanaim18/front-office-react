@@ -4,22 +4,22 @@ import TestimonialCard from "../common/TestimonialCard"
 const WhyDonate = () => {
   const reasons = [
     {
-      icon: <Heart className="h-8 w-8 text-[#460904]" />,
+      icon: <Heart className="h-8 w-8 text-[#d93f31]" />,
       title: "Sauver des vies",
       description: "Un seul don peut sauver jusqu'à trois vies différentes.",
     },
     {
-      icon: <Clock className="h-8 w-8 text-[#460904]" />,
+      icon: <Clock className="h-8 w-8 text-[]" />,
       title: "Rapide et simple",
       description: "Le processus ne prend que 30 à 45 minutes de votre temps.",
     },
     {
-      icon: <Award className="h-8 w-8 text-[#460904]" />,
+      icon: <Award className="h-8 w-8 text-[#d93f31]" />,
       title: "Bénéfique pour vous",
       description: "Bilan de santé gratuit et réduction des risques cardiaques.",
     },
     {
-      icon: <Users className="h-8 w-8 text-[#460904]" />,
+      icon: <Users className="h-8 w-8 text-[#d93f31]" />,
       title: "Rejoindre une communauté",
       description: "Faites partie d'un réseau solidaire qui sauve des vies.",
     },
@@ -52,7 +52,7 @@ const WhyDonate = () => {
     <section className="py-16 bg-white" id="why-donate">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-[#460904] mb-4 relative inline-block">
+          <h2 className="text-3xl md:text-4xl font-bold text-[#d93f31] mb-4 relative inline-block">
             Pourquoi donner son sang ?
             <span className="absolute -bottom-2 left-0 right-0 h-1 bg-[#b2d3e1] transform scale-x-50 group-hover:scale-x-100 transition-transform"></span>
           </h2>
@@ -67,12 +67,12 @@ const WhyDonate = () => {
           {reasons.map((reason, index) => (
             <div
               key={index}
-              className="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-all border-l-4 border-[#b2d3e1] hover:border-[#460904] group hover:-translate-y-1 transform"
+              className="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-all border-l-4 border-[#b2d3e1] hover:border-[#d93f31] group hover:-translate-y-1 transform"
               data-aos="fade-up"
               data-aos-delay={index * 100}
             >
               <div className="mb-4 transform group-hover:scale-110 transition-transform">{reason.icon}</div>
-              <h3 className="text-xl font-semibold mb-2 text-gray-800 group-hover:text-[#460904] transition-colors">
+              <h3 className="text-xl font-semibold mb-2 text-gray-800 group-hover:text-[#d93f31] transition-colors">
                 {reason.title}
               </h3>
               <p className="text-gray-600">{reason.description}</p>
@@ -83,7 +83,7 @@ const WhyDonate = () => {
         {/* Big stat */}
         <div className="bg-gradient-to-r from-[#b2d3e1]/30 to-[#b2d3e1]/10 rounded-2xl p-8 md:p-12 mb-16 text-center transform hover:scale-[1.02] transition-transform">
           <div className="inline-block bg-white rounded-full p-6 shadow-lg mb-6 relative overflow-hidden group">
-            <div className="text-5xl md:text-6xl font-bold text-[#460904] relative z-10 group-hover:animate-pulse">
+            <div className="text-5xl md:text-6xl font-bold text-[#d93f31] relative z-10 group-hover:animate-pulse">
               1 = 3
             </div>
             <div className="absolute inset-0 bg-[#b2d3e1]/0 group-hover:bg-[#b2d3e1]/10 transition-colors rounded-full"></div>

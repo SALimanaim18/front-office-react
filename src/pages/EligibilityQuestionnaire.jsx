@@ -1,7 +1,15 @@
+// src/pages/EligibilityQuestionnaire.jsx
+
+"use client";
+
 import { useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import Navbar from "../components/layout/Navbar";
+import Footer from "../components/layout/Footer";
 
 export default function EligibilityQuestionnaire() {
+  const { id: requestId } = useParams(); 
+  const navigate = useNavigate();
   const [answers, setAnswers] = useState({});
   const [showResult, setShowResult] = useState(false);
   const [allQuestionsAnswered, setAllQuestionsAnswered] = useState(false);
@@ -77,6 +85,9 @@ export default function EligibilityQuestionnaire() {
   const handleSubmit = (e) => {
     e.preventDefault();
     setShowResult(true);
+    if (checkEligibility()) {
+      navigate(`/request-confirmation/${requestId}`);
+    }
   };
 
   const handleReset = () => {
@@ -86,7 +97,7 @@ export default function EligibilityQuestionnaire() {
   };
 
   const colors = {
-    primary: "#460904",
+    primary: "#d93f31",
     secondary: "#b2d3e1",
     red: "#dc2626",
     green: "#10b981"
@@ -105,7 +116,7 @@ export default function EligibilityQuestionnaire() {
             <div className="px-6 py-8 space-y-8">
               {questionSections.map((section) => (
                 <div key={section.id}>
-                  <h2 className="text-lg font-semibold mb-3 text-[#460904]">{section.title}</h2>
+                  <h2 className="text-lg font-semibold mb-3 text-[#d93f31]">{section.title}</h2>
                   <div className="space-y-4">
                     {section.questions.map((question) => (
                       <div key={question.id} className="bg-[#b2d3e11a] p-4 rounded-md border border-[#b2d3e1]">
@@ -119,7 +130,7 @@ export default function EligibilityQuestionnaire() {
                                 value={val}
                                 checked={answers[question.id] === val}
                                 onChange={() => handleAnswerChange(question.id, val)}
-                                className="mr-2 h-4 w-4 text-[#460904]"
+                                className="mr-2 h-4 w-4 text-[#d93f31]"
                                 style={{ accentColor: colors.primary }}
                               />
                               {val.charAt(0).toUpperCase() + val.slice(1)}
@@ -146,35 +157,36 @@ export default function EligibilityQuestionnaire() {
             <div className="px-6 py-8">
               {checkEligibility() ? (
                 <div className="bg-green-50 border-l-4 border-green-500 p-6 rounded-lg">
-                  <h2 className="text-lg font-bold text-green-800">✅ Vous êtes probablement éligible</h2>
+                  <h2 className="text-lg font-bold text-green-800">Vous êtes probablement éligible</h2>
                   <p className="mt-2 text-sm text-green-700">
-                    Vos réponses indiquent que vous pourriez être apte à donner votre sang. La confirmation finale sera faite par un professionnel de santé.
+                    Vos réponses indiquent que vous pourriez être apte à donner votre sang.
                   </p>
                 </div>
               ) : (
                 <div className="bg-red-50 border-l-4 border-red-500 p-6 rounded-lg">
-                  <h2 className="text-lg font-bold text-red-800">❌ Vous n’êtes pas éligible pour le moment</h2>
+                  <h2 className="text-lg font-bold text-red-800">Vous n’êtes pas éligible pour le moment</h2>
                   <p className="mt-2 text-sm text-red-700">
-                    Selon vos réponses, vous ne remplissez pas les critères actuels. Vous pourrez peut-être donner dans le futur.
+                    Selon vos réponses, vous ne remplissez pas les critères actuels.
                   </p>
                 </div>
               )}
               <button
                 onClick={handleReset}
-                className="mt-6 w-full py-3 px-4 rounded-lg text-white font-semibold bg-[#460904] hover:bg-[#320302] transition duration-300"
+                className="mt-6 w-full py-3 px-4 rounded-lg text-white font-semibold bg-[#d93f31] hover:bg-[#320302] transition duration-300"
               >
                 Recommencer le questionnaire
               </button>
             </div>
           )}
 
-          <div className="px-6 py-4 bg-[#460904]">
+          <div className="px-6 py-4 bg-[#d93f31]">
             <p className="text-white text-sm text-center">
               Ce questionnaire est informatif. L'éligibilité réelle est déterminée par un professionnel de santé.
             </p>
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 }

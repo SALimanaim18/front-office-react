@@ -1,7 +1,8 @@
+
 import React, { useState, useEffect } from "react";
 import { createRequest, getCentersByCity, getAllCities } from "../services/api/requestApi";
 import Navbar from "../components/layout/Navbar";
-
+import Footer from "../components/layout/Footer"
 const bloodTypes = ["A+", "A−", "B+", "B−", "AB+", "AB−", "O+", "O−"];
 const urgencyLevels = [
   { value: "CRITIQUE", label: "Critique" },
@@ -74,13 +75,12 @@ export default function FormulaireDemandeSang() {
     if (!formValues.city) newErrors.city = "Champ requis";
     if (!formValues.donationCenter) newErrors.donationCenter = "Champ requis";
     
-    // Validation des unités de sang
     if (!formValues.requiredBloodUnits) {
       newErrors.requiredBloodUnits = "Champ requis";
     } else if (formValues.requiredBloodUnits < 1) {
       newErrors.requiredBloodUnits = "Minimum 1 unité";
-    } else if (formValues.requiredBloodUnits > 100) {
-      newErrors.requiredBloodUnits = "Maximum 100 unités";
+    } else if (formValues.requiredBloodUnits > 10000) {
+      newErrors.requiredBloodUnits = "Maximum 10000 ml";
     }
     
     if (formValues.description && formValues.description.length > 1000) {
@@ -98,7 +98,6 @@ export default function FormulaireDemandeSang() {
       onCityChange(value);
     }
     
-    // Clear error when field is filled
     if (errors[name] && value) {
       setErrors(prev => ({ ...prev, [name]: null }));
     }
@@ -318,7 +317,7 @@ export default function FormulaireDemandeSang() {
                     id="requiredBloodUnits"
                     name="requiredBloodUnits"
                     min="1"
-                    max="500"
+                    max="10000"
                     value={formValues.requiredBloodUnits}
                     onChange={handleChange}
                     className={`block w-full py-2 px-3 border ${
@@ -492,6 +491,7 @@ export default function FormulaireDemandeSang() {
           </div>
         </div>
       </div>
+      <Footer></Footer>
     </>
   );
 }

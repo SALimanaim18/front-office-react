@@ -24,7 +24,7 @@ const HowItWorks = () => {
       icon: <Heart className="h-10 w-10 text-white" />,
       title: "Sauver une vie",
       description: "Le don est effectué et contribue à sauver la vie d'une personne dans le besoin.",
-      color: "#460904",
+      color: "#d93f31",
     },
   ]
 
@@ -32,11 +32,11 @@ const HowItWorks = () => {
     <section className="py-16 bg-gray-50 relative overflow-hidden" id="how-it-works">
       {/* Background decorative elements */}
       <div className="absolute top-0 right-0 w-64 h-64 bg-[#b2d3e1]/10 rounded-full -mr-32 -mt-32"></div>
-      <div className="absolute bottom-0 left-0 w-64 h-64 bg-[#460904]/5 rounded-full -ml-32 -mb-32"></div>
+      <div className="absolute bottom-0 left-0 w-64 h-64 bg-[#d93f31]/5 rounded-full -ml-32 -mb-32"></div>
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-[#460904] mb-4 relative inline-block">
+          <h2 className="text-3xl md:text-4xl font-bold text-[#d93f31] mb-4 relative inline-block">
             Comment ça marche ?
             <div className="absolute h-1 w-12 bg-[#b2d3e1] bottom-0 left-1/2 transform -translate-x-1/2"></div>
           </h2>
@@ -48,7 +48,7 @@ const HowItWorks = () => {
         {/* Steps */}
         <div className="relative">
           {/* Connection line */}
-          <div className="hidden md:block absolute top-1/2 left-0 right-0 h-1 bg-gradient-to-r from-[#b2d3e1] to-[#460904] transform -translate-y-1/2 z-0"></div>
+          <div className="hidden md:block absolute top-1/2 left-0 right-0 h-1 bg-gradient-to-r from-[#b2d3e1] to-[#d93f31] transform -translate-y-1/2 z-0"></div>
 
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 relative z-10">
             {steps.map((step, index) => (
@@ -74,7 +74,7 @@ const HowItWorks = () => {
           <p className="text-lg text-gray-700 mb-6">
             Le processus est simple, sécurisé et peut faire toute la différence pour quelqu'un dans le besoin.
           </p>
-          <button className="inline-flex items-center px-6 py-3 rounded-full bg-[#460904] text-white font-medium hover:bg-[#5a0b06] transition-all shadow-md hover:shadow-lg transform hover:scale-105">
+          <button className="inline-flex items-center px-6 py-3 rounded-full bg-[#d93f31] text-white font-medium hover:bg-[#5a0b06] transition-all shadow-md hover:shadow-lg transform hover:scale-105">
             <Heart className="mr-2 h-5 w-5 animate-heartbeat" />
             Commencer maintenant
           </button>

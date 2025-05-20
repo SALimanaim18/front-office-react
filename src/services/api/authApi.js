@@ -1,4 +1,3 @@
-// src/services/api/authApi.js
 import axiosInstance from '../axiosInstance'
 
 export const login = (data) => {

@@ -85,15 +85,15 @@
         <div className="w-full max-w-md">
             <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
             {/* Header */}
-            <div className="bg-gradient-to-r from-[#460904] to-[#5a0b06] px-6 py-8 text-white relative">
+            <div className="bg-gradient-to-r from-[#d93f31] to-[#5a0b06] px-6 py-8 text-white relative">
                 <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-bl-full"></div>
 
                 <div className="flex items-center mb-4">
                 <div className="h-12 w-12 rounded-full bg-white flex items-center justify-center mr-4">
                     {isLogin ? (
-                    <Lock className="h-6 w-6 text-[#460904]" />
+                    <Lock className="h-6 w-6 text-[#d93f31]" />
                     ) : (
-                    <UserPlus className="h-6 w-6 text-[#460904]" />
+                    <UserPlus className="h-6 w-6 text-[#d93f31]" />
                     )}
                 </div>
                 <div>
@@ -180,12 +180,12 @@
                         value={formData.name}
                         onChange={handleChange}
                         className={`pl-10 w-full px-4 py-2.5 border ${
-                            errors.name ? "border-[#460904]" : "border-gray-300"
+                            errors.name ? "border-[#d93f31]" : "border-gray-300"
                         } rounded-lg focus:ring-2 focus:ring-[#b2d3e1] focus:border-[#b2d3e1] transition-all`}
                         placeholder="Votre nom complet"
                         />
                     </div>
-                    {errors.name && <p className="mt-1 text-sm text-[#460904]">{errors.name}</p>}
+                    {errors.name && <p className="mt-1 text-sm text-[#d93f31]">{errors.name}</p>}
                     </div>
                 )}
 
@@ -205,12 +205,12 @@
                         value={formData.email}
                         onChange={handleChange}
                         className={`pl-10 w-full px-4 py-2.5 border ${
-                        errors.email ? "border-[#460904]" : "border-gray-300"
+                        errors.email ? "border-[#d93f31]" : "border-gray-300"
                         } rounded-lg focus:ring-2 focus:ring-[#b2d3e1] focus:border-[#b2d3e1] transition-all`}
                         placeholder="votre@email.com"
                     />
                     </div>
-                    {errors.email && <p className="mt-1 text-sm text-[#460904]">{errors.email}</p>}
+                    {errors.email && <p className="mt-1 text-sm text-[#d93f31]">{errors.email}</p>}
                 </div>
 
                 {/* Password field */}
@@ -229,7 +229,7 @@
                         value={formData.password}
                         onChange={handleChange}
                         className={`pl-10 w-full px-4 py-2.5 border ${
-                        errors.password ? "border-[#460904]" : "border-gray-300"
+                        errors.password ? "border-[#d93f31]" : "border-gray-300"
                         } rounded-lg focus:ring-2 focus:ring-[#b2d3e1] focus:border-[#b2d3e1] transition-all`}
                         placeholder="••••••••"
                     />
@@ -246,7 +246,7 @@
                         )}
                     </button>
                     </div>
-                    {errors.password && <p className="mt-1 text-sm text-[#460904]">{errors.password}</p>}
+                    {errors.password && <p className="mt-1 text-sm text-[#d93f31]">{errors.password}</p>}
                 </div>
 
                 {/* Confirm Password field (only for signup) */}
@@ -266,12 +266,12 @@
                         value={formData.confirmPassword}
                         onChange={handleChange}
                         className={`pl-10 w-full px-4 py-2.5 border ${
-                            errors.confirmPassword ? "border-[#460904]" : "border-gray-300"
+                            errors.confirmPassword ? "border-[#d93f31]" : "border-gray-300"
                         } rounded-lg focus:ring-2 focus:ring-[#b2d3e1] focus:border-[#b2d3e1] transition-all`}
                         placeholder="••••••••"
                         />
                     </div>
-                    {errors.confirmPassword && <p className="mt-1 text-sm text-[#460904]">{errors.confirmPassword}</p>}
+                    {errors.confirmPassword && <p className="mt-1 text-sm text-[#d93f31]">{errors.confirmPassword}</p>}
                     </div>
                 )}
 
@@ -283,13 +283,13 @@
                         id="remember-me"
                         name="remember-me"
                         type="checkbox"
-                        className="h-4 w-4 text-[#460904] focus:ring-[#b2d3e1] border-gray-300 rounded"
+                        className="h-4 w-4 text-[#d93f31] focus:ring-[#b2d3e1] border-gray-300 rounded"
                         />
                         <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-700">
                         Se souvenir de moi
                         </label>
                     </div>
-                    <a href="#" className="text-sm font-medium text-[#460904] hover:text-[#5a0b06] transition-colors">
+                    <a href="#" className="text-sm font-medium text-[#d93f31] hover:text-[#5a0b06] transition-colors">
                         Mot de passe oublié ?
                     </a>
                     </div>
@@ -299,7 +299,7 @@
                 <button
                     type="submit"
                     disabled={isLoading}
-                    className="w-full flex justify-center items-center py-2.5 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-[#460904] hover:bg-[#5a0b06] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#b2d3e1] transition-colors group disabled:opacity-70 disabled:cursor-not-allowed"
+                    className="w-full flex justify-center items-center py-2.5 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-[#d93f31] hover:bg-[#5a0b06] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#b2d3e1] transition-colors group disabled:opacity-70 disabled:cursor-not-allowed"
                 >
                     {isLoading ? (
                     <>
@@ -341,7 +341,7 @@
                     <button
                     type="button"
                     onClick={toggleMode}
-                    className="font-medium text-[#460904] hover:text-[#5a0b06] transition-colors"
+                    className="font-medium text-[#d93f31] hover:text-[#5a0b06] transition-colors"
                     >
                     {isLogin ? "S'inscrire" : "Se connecter"}
                     </button>

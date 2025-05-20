@@ -33,19 +33,19 @@ const MobileApp = () => {
                   <div className="flex justify-between items-center mb-4">
                     <div className="text-xs font-bold">9:41</div>
                     <div className="flex space-x-1">
-                      <div className="w-4 h-4 rounded-full bg-[#460904]"></div>
-                      <div className="w-4 h-4 rounded-full bg-[#460904] opacity-80"></div>
-                      <div className="w-4 h-4 rounded-full bg-[#460904] opacity-60"></div>
+                      <div className="w-4 h-4 rounded-full bg-[#d93f31]"></div>
+                      <div className="w-4 h-4 rounded-full bg-[#d93f31] opacity-80"></div>
+                      <div className="w-4 h-4 rounded-full bg-[#d93f31] opacity-60"></div>
                     </div>
                   </div>
 
                   {/* App header */}
                   <div className="flex items-center mb-6">
-                    <div className="h-8 w-8 rounded-full bg-[#460904] flex items-center justify-center">
+                    <div className="h-8 w-8 rounded-full bg-[#d93f31] flex items-center justify-center">
                       <span className="text-white font-bold text-xs">S</span>
                     </div>
                     <span className="ml-2 text-lg font-bold">
-                      <span className="text-[#460904]">Sang</span>
+                      <span className="text-[#d93f31]">Sang</span>
                       <span className="text-[#b2d3e1]">Connect</span>
                     </span>
                   </div>
@@ -53,11 +53,11 @@ const MobileApp = () => {
                   {/* App content */}
                   <div className="bg-white rounded-xl shadow-md p-3 mb-3 animate-fadeIn">
                     <div className="flex justify-between items-center mb-2">
-                      <div className="text-xs font-bold text-[#460904]">Demande urgente</div>
+                      <div className="text-xs font-bold text-[#d93f31]">Demande urgente</div>
                       <div className="text-xs text-gray-500">Il y a 5 min</div>
                     </div>
                     <div className="flex items-center">
-                      <div className="h-10 w-10 rounded-full bg-[#460904] flex items-center justify-center text-white font-bold text-sm">
+                      <div className="h-10 w-10 rounded-full bg-[#d93f31] flex items-center justify-center text-white font-bold text-sm">
                         O+
                       </div>
                       <div className="ml-2">
@@ -73,7 +73,7 @@ const MobileApp = () => {
                       <div className="text-xs text-gray-500">Il y a 30 min</div>
                     </div>
                     <div className="flex items-center">
-                      <div className="h-10 w-10 rounded-full bg-[#b2d3e1] flex items-center justify-center text-[#460904] font-bold text-sm">
+                      <div className="h-10 w-10 rounded-full bg-[#b2d3e1] flex items-center justify-center text-[#d93f31] font-bold text-sm">
                         A-
                       </div>
                       <div className="ml-2">
@@ -84,7 +84,7 @@ const MobileApp = () => {
                   </div>
 
                   <div className="mt-auto">
-                    <div className="bg-[#460904] text-white text-xs font-medium py-2 px-4 rounded-full text-center animate-pulse">
+                    <div className="bg-[#d93f31] text-white text-xs font-medium py-2 px-4 rounded-full text-center animate-pulse">
                       Je veux donner
                     </div>
                   </div>
@@ -98,9 +98,9 @@ const MobileApp = () => {
 
           <div className="md:w-1/2 order-1 md:order-2">
             <div className="mb-6 inline-block p-3 bg-[#b2d3e1]/20 rounded-full transform transition-transform hover:scale-110">
-              <Smartphone className="h-10 w-10 text-[#460904]" />
+              <Smartphone className="h-10 w-10 text-[#d93f31]" />
             </div>
-            <h2 className="text-3xl md:text-4xl font-bold text-[#460904] mb-4">
+            <h2 className="text-3xl md:text-4xl font-bold text-[#d93f31] mb-4">
               Application mobile bientôt disponible
             </h2>
             <p className="text-gray-600 mb-8">
@@ -135,7 +135,7 @@ const MobileApp = () => {
                   />
                   <button
                     type="submit"
-                    className="px-6 py-2 bg-[#460904] text-white font-medium rounded-lg hover:bg-[#5a0b06] transition-all transform hover:scale-105"
+                    className="px-6 py-2 bg-[#d93f31] text-white font-medium rounded-lg hover:bg-[#5a0b06] transition-all transform hover:scale-105"
                   >
                     M'inscrire
                   </button>
@@ -151,31 +151,31 @@ const MobileApp = () => {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div className="flex items-center group">
                   <div className="h-8 w-8 rounded-full bg-[#b2d3e1]/30 flex items-center justify-center mr-3 group-hover:bg-[#b2d3e1]/50 transition-colors">
-                    <Check className="h-4 w-4 text-[#460904]" />
+                    <Check className="h-4 w-4 text-[#d93f31]" />
                   </div>
-                  <span className="text-gray-700 group-hover:text-[#460904] transition-colors">
+                  <span className="text-gray-700 group-hover:text-[#d93f31] transition-colors">
                     Alertes en temps réel
                   </span>
                 </div>
                 <div className="flex items-center group">
                   <div className="h-8 w-8 rounded-full bg-[#b2d3e1]/30 flex items-center justify-center mr-3 group-hover:bg-[#b2d3e1]/50 transition-colors">
-                    <Check className="h-4 w-4 text-[#460904]" />
+                    <Check className="h-4 w-4 text-[#d93f31]" />
                   </div>
-                  <span className="text-gray-700 group-hover:text-[#460904] transition-colors">
+                  <span className="text-gray-700 group-hover:text-[#d93f31] transition-colors">
                     Géolocalisation des centres
                   </span>
                 </div>
                 <div className="flex items-center group">
                   <div className="h-8 w-8 rounded-full bg-[#b2d3e1]/30 flex items-center justify-center mr-3 group-hover:bg-[#b2d3e1]/50 transition-colors">
-                    <Check className="h-4 w-4 text-[#460904]" />
+                    <Check className="h-4 w-4 text-[#d93f31]" />
                   </div>
-                  <span className="text-gray-700 group-hover:text-[#460904] transition-colors">Suivi de vos dons</span>
+                  <span className="text-gray-700 group-hover:text-[#d93f31] transition-colors">Suivi de vos dons</span>
                 </div>
                 <div className="flex items-center group">
                   <div className="h-8 w-8 rounded-full bg-[#b2d3e1]/30 flex items-center justify-center mr-3 group-hover:bg-[#b2d3e1]/50 transition-colors">
-                    <Check className="h-4 w-4 text-[#460904]" />
+                    <Check className="h-4 w-4 text-[#d93f31]" />
                   </div>
-                  <span className="text-gray-700 group-hover:text-[#460904] transition-colors">
+                  <span className="text-gray-700 group-hover:text-[#d93f31] transition-colors">
                     Rappels personnalisés
                   </span>
                 </div>

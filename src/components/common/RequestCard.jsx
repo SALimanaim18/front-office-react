@@ -18,9 +18,9 @@ const RequestCard = ({ request, delay = 0 }) => {
   // Function to determine blood type styling
   const getBloodTypeStyle = (bloodType) => {
     if (bloodType.includes("O")) {
-      return "bg-[#460904] text-white"
+      return "bg-[#d93f31] text-white"
     } else if (bloodType.includes("A")) {
-      return "bg-[#b2d3e1] text-[#460904]"
+      return "bg-[#b2d3e1] text-[#d93f31]"
     } else if (bloodType.includes("B")) {
       return "bg-[#8fb9cc] text-white"
     } else {

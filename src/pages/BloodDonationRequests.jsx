@@ -13,10 +13,12 @@ import {
 } from "lucide-react";
 import Navbar from "../components/layout/Navbar";
 import { getAllRequests, getAllBloodTypes } from "../services/api/requestApi";
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
+import Footer from "../components/layout/Footer";
 
 const RequestCard = ({ request, delay = 0 }) => {
-  const cityName = typeof request.city === "object" ? request.city?.name : request.city;
+  const cityName = request.cityName || "Ville inconnue";
+  const donationCenterName = request.donationCenterName || "Centre inconnu";
 
   const getUrgencyStyle = (urgency) => {
     switch (urgency?.toLowerCase()) {
@@ -32,8 +34,8 @@ const RequestCard = ({ request, delay = 0 }) => {
   };
 
   const getBloodTypeStyle = (bloodType) => {
-    if (bloodType?.includes("O")) return "bg-[#460904] text-white";
-    if (bloodType?.includes("A")) return "bg-[#b2d3e1] text-[#460904]";
+    if (bloodType?.includes("O")) return "bg-[#d93f31] text-white";
+    if (bloodType?.includes("A")) return "bg-[#b2d3e1] text-[#d93f31]";
     if (bloodType?.includes("B")) return "bg-[#8fb9cc] text-white";
     return "bg-[#6c9fb8] text-white";
   };
@@ -67,7 +69,7 @@ const RequestCard = ({ request, delay = 0 }) => {
         </div>
 
         <h3 className="font-semibold text-gray-800 mb-1">
-          {request.donationCenter?.name || "Centre inconnu"}
+          {donationCenterName}
         </h3>
         <div className="flex items-center text-gray-500 text-sm mb-3">
           <MapPin className="h-4 w-4 mr-1" />
@@ -78,9 +80,23 @@ const RequestCard = ({ request, delay = 0 }) => {
           {request.description || "Aucune description."}
         </p>
 
-        <div className="flex items-center mb-4 text-sm text-gray-700">
-          <Droplet className="h-4 w-4 mr-1 text-[#e74c3c]" />
-          <span>Besoin de {request.requiredUnits || "?"} unités</span>
+        <div className="flex flex-col gap-2 mb-4">
+          <div className="flex items-center text-sm text-gray-700">
+            <Droplet className="h-4 w-4 mr-1 text-[#e74c3c]" />
+            <span>Besoin de {request.requiredBloodUnits || "?"} ml</span>
+          </div>
+          {request.requiredBloodUnits && (
+            <div className="bg-red-50 rounded-md p-2 text-xs font-medium text-red-700 flex items-center">
+              <Droplet className="h-3.5 w-3.5 mr-1 text-[#e74c3c]" />
+              <span>Objectif: {request.requiredBloodUnits} ml</span>
+              <div className="ml-2 flex-1 bg-gray-200 rounded-full h-1.5 overflow-hidden">
+                <div 
+                  className="bg-[#e74c3c] h-full rounded-full" 
+                  style={{ width: `${Math.min(((request.currentUnits || 0) / request.requiredBloodUnits) * 100, 100)}%` }}
+                ></div>
+              </div>
+            </div>
+          )}
         </div>
 
         <div className="flex items-center justify-between mt-4 pt-4 border-t border-gray-200">
@@ -88,16 +104,14 @@ const RequestCard = ({ request, delay = 0 }) => {
             <Clock className="h-3.5 w-3.5 mr-1" />
             <span>{getElapsedTime(request.createdAt)}</span>
           </div>
-         <Link to="/EligibilityQuestionnaire">
-                    <button
-            className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#e74c3c] text-white text-sm font-semibold rounded-full shadow-md hover:bg-[#c0392b] transition-transform duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#e74c3c]"
-          >
-            <Heart className="h-4 w-4" />
-            Je veux aider
-          </button>
-
-         </Link>
-
+          <Link to={`/eligibility/${request.id}`}>
+            <button
+              className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#e74c3c] text-white text-sm font-semibold rounded-full shadow-md hover:bg-[#c0392b] transition-transform duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#e74c3c]"
+            >
+              <Heart className="h-4 w-4" />
+              Je veux aider
+            </button>
+          </Link>
         </div>
       </div>
     </div>
@@ -120,8 +134,9 @@ export default function BloodDonationRequests() {
       try {
         setLoading(true);
         const requestsResponse = await getAllRequests();
-        setBloodRequests(requestsResponse.data);
-        setFilteredRequests(requestsResponse.data);
+        const confirmedRequests = requestsResponse.data.filter(r => r.confirmedByCenterManager === true);
+        setBloodRequests(confirmedRequests);
+        setFilteredRequests(confirmedRequests);
         const bloodTypesResponse = await getAllBloodTypes();
         setBloodTypes(bloodTypesResponse.data);
         setLoading(false);
@@ -131,7 +146,6 @@ export default function BloodDonationRequests() {
         setLoading(false);
       }
     };
-
     fetchData();
   }, []);
 
@@ -143,20 +157,20 @@ export default function BloodDonationRequests() {
   }, []);
 
   const cities = useMemo(() => {
-    return Array.from(new Set(bloodRequests.map((r) => (typeof r.city === "object" ? r.city?.name : r.city)))).filter(Boolean);
+    return Array.from(new Set(bloodRequests.map((r) => r.cityName || "Ville inconnue"))).filter(Boolean);
   }, [bloodRequests]);
 
   useEffect(() => {
     if (bloodRequests.length === 0) return;
     const filtered = bloodRequests.filter((request) => {
-      const cityName = typeof request.city === "object" ? request.city?.name : request.city;
-      const hospitalName = request.donationCenter?.name || "";
+      const cityName = request.cityName || "Ville inconnue";
+      const hospitalName = request.donationCenterName || "Centre inconnu";
       const description = request.description || "";
       const bloodType = request.bloodType || "";
       const matchesSearch =
         searchTerm === "" ||
         hospitalName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        (cityName && cityName.toLowerCase().includes(searchTerm.toLowerCase())) ||
+        cityName.toLowerCase().includes(searchTerm.toLowerCase()) ||
         description.toLowerCase().includes(searchTerm.toLowerCase()) ||
         bloodType.toLowerCase().includes(searchTerm.toLowerCase());
       const matchesBloodType = selectedBloodTypes.length === 0 || selectedBloodTypes.includes(request.bloodType);
@@ -186,7 +200,7 @@ export default function BloodDonationRequests() {
       <section className="py-16 bg-white min-h-screen" id="requests">
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-8">
-            <h2 className="text-3xl md:text-4xl font-bold text-[#460904] mb-4 relative inline-block">
+            <h2 className="text-3xl md:text-4xl font-bold text-[#d93f31] mb-4 relative inline-block">
               Demandes actuelles
               <div className="absolute h-1 w-12 bg-[#b2d3e1] bottom-0 left-1/2 transform -translate-x-1/2"></div>
             </h2>
@@ -267,7 +281,7 @@ export default function BloodDonationRequests() {
             )}
           </div>
 
-          {/* 🩸 Résultats */}
+          {/* Résultats */}
           {loading ? (
             <div className="text-center py-12">
               <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-[#e74c3c] border-r-transparent mb-4"></div>
@@ -300,6 +314,7 @@ export default function BloodDonationRequests() {
           )}
         </div>
       </section>
+      <Footer />
     </>
   );
 }
